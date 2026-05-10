@@ -77,19 +77,11 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
-      // CustomOgImages works because quartz/util/og.tsx is patched to read
-      // self-hosted fonts from quartz/static/fonts/ before falling back to
-      // Google Fonts. Amarante uses weight 700 (header), Aptos Narrow uses
-      // weight 400 (body). Both must exist as .ttf (satori does not read woff2).
-      //
-      // Options are required in Quartz 4.5.x: defaultImage destructures
-      // userOpts, so passing nothing crashes.
-      Plugin.CustomOgImages({
-        colorScheme: "darkMode",
-        width: 1200,
-        height: 630,
-        excludeRoot: false,
-      }),
+      // CustomOgImages disabled. The plugin's call signature in 4.5.2 doesn't
+      // match the docs or the source we could find, and after five iterations
+      // it's not worth more cycles. The local-font patches in quartz/util/og.tsx
+      // remain in place (harmless) so re-enabling later is one line of work
+      // plus diagnosing the real call shape.
     ],
   },
 }
