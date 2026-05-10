@@ -17,7 +17,6 @@ import { QUARTZ } from "./path"
 import { formatDate, getDate } from "../components/Date"
 import readingTime from "reading-time"
 import { i18n } from "../i18n"
-import chalk from "chalk"
 
 const defaultHeaderWeight = [700]
 const defaultBodyWeight = [400]
@@ -105,10 +104,8 @@ export async function fetchTtf(
     try {
       return await fs.readFile(localPath)
     } catch {
-      console.log(
-        chalk.yellow(
-          `\nWarning: Local font ${rawFontName}@${weight} not found at ${localPath}, falling back to Google Fonts`,
-        ),
+      console.warn(
+        `\nWarning: Local font ${rawFontName}@${weight} not found at ${localPath}, falling back to Google Fonts`,
       )
     }
   }
@@ -135,10 +132,8 @@ export async function fetchTtf(
   const match = urlRegex.exec(css)
 
   if (!match) {
-    console.log(
-      chalk.yellow(
-        `\nWarning: Failed to fetch font ${rawFontName} with weight ${weight}, got ${cssResponse.statusText}`,
-      ),
+    console.warn(
+      `\nWarning: Failed to fetch font ${rawFontName} with weight ${weight}, got ${cssResponse.statusText}`,
     )
     return
   }
