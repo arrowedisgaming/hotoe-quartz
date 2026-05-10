@@ -16,35 +16,39 @@ const config: QuartzConfig = {
     ignorePatterns: ["private", "templates", ".obsidian", "transcripts"],
     defaultDateType: "modified",
     theme: {
-      fontOrigin: "googleFonts",
-      cdnCaching: true,
+      // All three fonts are self-hosted. @font-face rules live in quartz/styles/custom.scss.
+      // fontOrigin "local" tells Quartz not to inject Google Fonts <link> tags.
+      fontOrigin: "local",
+      cdnCaching: false,
       typography: {
-        header: "Cormorant Garamond",
-        body: "EB Garamond",
-        code: "JetBrains Mono",
+        header: "Amarante",
+        body: "Aptos Narrow",
+        code: "ErikasBuero",
       },
+      // Palette pulled from Fancy-a-Story → Art Deco skin in your vault.
+      // Dark mode is the primary mode you use; light mode mirrors the Art Deco light variant.
       colors: {
         lightMode: {
-          light: "#faf4eb",
-          lightgray: "#e5d8c2",
-          gray: "#8a7d6a",
-          darkgray: "#3a2f25",
-          dark: "#1f1810",
-          secondary: "#7a1f1f",
-          tertiary: "#b8860b",
-          highlight: "rgba(184, 134, 11, 0.18)",
-          textHighlight: "#f5d97799",
+          light: "#d8d7cb",       // --color-base-00 (Art Deco light bg)
+          lightgray: "#cecdc2",   // --color-base-10
+          gray: "#8f8f89",        // --color-base-60 (muted)
+          darkgray: "#060a24",    // --color-base-100 (body text)
+          dark: "#060a24",        // strongest text
+          secondary: "#f07605",   // accent (orange, from app.json)
+          tertiary: "#ad941f",    // gold complement
+          highlight: "rgba(240, 118, 5, 0.15)",
+          textHighlight: "rgba(173, 148, 31, 0.4)",
         },
         darkMode: {
-          light: "#1a140e",
-          lightgray: "#2e2419",
-          gray: "#6b5d4c",
-          darkgray: "#d3c5ad",
-          dark: "#f0e6d2",
-          secondary: "#c97a3a",
-          tertiary: "#e8c067",
-          highlight: "rgba(232, 192, 103, 0.15)",
-          textHighlight: "#b8860b66",
+          light: "#070918",       // --color-base-00 (Art Deco dark bg, deep midnight)
+          lightgray: "#1d1e26",   // --color-base-10
+          gray: "#83817a",        // --color-base-60 (muted)
+          darkgray: "#e2dec5",    // --color-base-100 (body text, warm cream)
+          dark: "#ffffff",        // strongest text / headings emphasis
+          secondary: "#f07605",   // accent (orange)
+          tertiary: "#e0c952",    // gold (middle-color)
+          highlight: "rgba(240, 118, 5, 0.18)",
+          textHighlight: "rgba(224, 201, 82, 0.35)",
         },
       },
     },

@@ -1,3 +1,146 @@
-@use "./base.scss";
+// Paste this into quartz/styles/custom.scss in your fork.
+// Quartz v4. Loads after base.scss, overrides everything safely.
+//
+// Pairs with quartz.config.ts:
+//   typography: header "Amarante", body "Aptos Narrow", code "ErikasBuero"
+//   fontOrigin: "local"
+//
+// Font files must live at quartz/static/fonts/*. See FONTS.md.
 
-// put your custom CSS here!
+// ---- @font-face declarations -------------------------------------------------
+
+@font-face {
+  font-family: "Amarante";
+  src: url("/static/fonts/amarante-regular.woff2") format("woff2"),
+       url("/static/fonts/amarante-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aptos Narrow";
+  src: url("/static/fonts/aptos-narrow-regular.woff2") format("woff2"),
+       url("/static/fonts/aptos-narrow-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aptos Narrow";
+  src: url("/static/fonts/aptos-narrow-italic.woff2") format("woff2"),
+       url("/static/fonts/aptos-narrow-italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aptos Narrow";
+  src: url("/static/fonts/aptos-narrow-bold.woff2") format("woff2"),
+       url("/static/fonts/aptos-narrow-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Aptos Narrow";
+  src: url("/static/fonts/aptos-narrow-bold-italic.woff2") format("woff2"),
+       url("/static/fonts/aptos-narrow-bold-italic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ErikasBuero";
+  src: url("/static/fonts/erikasbuero-regular.woff2") format("woff2"),
+       url("/static/fonts/erikasbuero-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ---- Base size ---------------------------------------------------------------
+// Your vault uses baseFontSize 17. Quartz defaults to 16; bump it.
+
+html {
+  font-size: 17px;
+}
+
+// ---- Bold colour -------------------------------------------------------------
+// Fancy-a-Story Art Deco gives bold its own colour (#D76015) in both modes.
+
+strong,
+b {
+  color: #d76015;
+}
+
+// ---- Headings ----------------------------------------------------------------
+// Amarante is a decorative display serif. Let it breathe.
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Amarante", serif;
+  letter-spacing: 0.01em;
+}
+
+// Inline titles (page heading) — give the orange a turn here.
+.page-title,
+article > h1:first-child {
+  color: var(--secondary);
+}
+
+// ---- Hairline gold rule, deco-style ------------------------------------------
+
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--tertiary) 20%,
+    var(--tertiary) 80%,
+    transparent 100%
+  );
+  margin: 2.5em auto;
+  opacity: 0.6;
+}
+
+// ---- Blockquotes -------------------------------------------------------------
+// Calling-card style: subtle gold left border, italic body.
+
+blockquote {
+  border-left: 2px solid var(--tertiary);
+  font-style: italic;
+  color: var(--darkgray);
+  opacity: 0.95;
+  padding-left: 1em;
+  margin-left: 0;
+}
+
+// ---- Code blocks -------------------------------------------------------------
+// Use the typewriter font even inside fenced code.
+
+code,
+pre,
+.expressive-code,
+.shiki {
+  font-family: "ErikasBuero", "Courier New", monospace !important;
+}
+
+// Inline code: subtle gold tint, no harsh background.
+:not(pre) > code {
+  background: rgba(224, 201, 82, 0.08);
+  border: 1px solid rgba(224, 201, 82, 0.18);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+// ---- Selection ---------------------------------------------------------------
+
+::selection {
+  background: rgba(240, 118, 5, 0.35);
+  color: inherit;
+}
