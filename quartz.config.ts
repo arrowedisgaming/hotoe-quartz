@@ -77,6 +77,10 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
+      // CustomOgImages works because quartz/util/og.tsx is patched to read
+      // self-hosted fonts from quartz/static/fonts/ before falling back to
+      // Google Fonts. Amarante uses weight 700 (header), Aptos Narrow uses
+      // weight 400 (body). Both must exist as .ttf (satori does not read woff2).
       Plugin.CustomOgImages(),
     ],
   },

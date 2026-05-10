@@ -1,3 +1,11 @@
+// Paste this over quartz/util/og.tsx in your Quartz fork.
+//
+// Only one change from upstream Quartz v4: fetchTtf() checks local disk first
+// for fonts we've self-hosted, before falling back to the Google Fonts CDN.
+// Everything else is verbatim from upstream so future merges stay clean.
+//
+// Local font lookup table is defined just above fetchTtf().
+
 import { promises as fs } from "fs"
 import { FontWeight, SatoriOptions } from "satori/wasm"
 import { GlobalConfiguration } from "../cfg"
@@ -9,13 +17,11 @@ import { QUARTZ } from "./path"
 import { formatDate, getDate } from "../components/Date"
 import readingTime from "reading-time"
 import { i18n } from "../i18n"
-import { styleText } from "util"
+import chalk from "chalk"
 
 const defaultHeaderWeight = [700]
 const defaultBodyWeight = [400]
-
 export async function getSatoriFonts(headerFont: FontSpecification, bodyFont: FontSpecification) {
-  // Get all weights for header and body fonts
   const headerWeights: FontWeight[] = (
     typeof headerFont === "string"
       ? defaultHeaderWeight
@@ -28,7 +34,6 @@ export async function getSatoriFonts(headerFont: FontSpecification, bodyFont: Fo
   const headerFontName = typeof headerFont === "string" ? headerFont : headerFont.name
   const bodyFontName = typeof bodyFont === "string" ? bodyFont : bodyFont.name
 
-  // Fetch fonts for all weights and convert to satori format in one go
   const headerFontPromises = headerWeights.map(async (weight) => {
     const data = await fetchTtf(headerFontName, weight)
     if (!data) return null
@@ -56,7 +61,6 @@ export async function getSatoriFonts(headerFont: FontSpecification, bodyFont: Fo
     Promise.all(bodyFontPromises),
   ])
 
-  // Filter out any failed fetches and combine header and body fonts
   const fonts: SatoriOptions["fonts"] = [
     ...headerFonts.filter((font): font is NonNullable<typeof font> => font !== null),
     ...bodyFonts.filter((font): font is NonNullable<typeof font> => font !== null),
@@ -65,22 +69,56 @@ export async function getSatoriFonts(headerFont: FontSpecification, bodyFont: Fo
   return fonts
 }
 
+// ─── LOCAL FONT TABLE ─────────────────────────────────────────────────────────
+// Maps "<font family name>" → { <weight>: "<filename in quartz/static/fonts/>" }.
+// satori requires TTF/OTF/WOFF (NOT WOFF2). Always point at .ttf files here.
+//
+// Amarante is a single-weight Google Font; we reuse its regular file for any
+// requested weight so satori has something to render.
+const LOCAL_FONTS: Record<string, Partial<Record<FontWeight, string>>> = {
+  Amarante: {
+    400: "amarante-regular.ttf",
+    700: "amarante-regular.ttf",
+  },
+  "Aptos Narrow": {
+    400: "aptos-narrow-regular.ttf",
+    700: "aptos-narrow-bold.ttf",
+  },
+  ErikasBuero: {
+    400: "erikasbuero-regular.ttf",
+  },
+}
+// ──────────────────────────────────────────────────────────────────────────────
+
 /**
- * Get the `.ttf` file of a google font
- * @param fontName name of google font
- * @param weight what font weight to fetch font
- * @returns `.ttf` file of google font
+ * Get the `.ttf` file of a font. Checks local disk first, then falls back to
+ * the Google Fonts CDN.
  */
 export async function fetchTtf(
   rawFontName: string,
   weight: FontWeight,
 ): Promise<Buffer<ArrayBufferLike> | undefined> {
+  // ─── LOCAL DISK LOOKUP (added) ──────────────────────────────────────────────
+  const localFile = LOCAL_FONTS[rawFontName]?.[weight]
+  if (localFile) {
+    const localPath = path.join(QUARTZ, "static", "fonts", localFile)
+    try {
+      return await fs.readFile(localPath)
+    } catch {
+      console.log(
+        chalk.yellow(
+          `\nWarning: Local font ${rawFontName}@${weight} not found at ${localPath}, falling back to Google Fonts`,
+        ),
+      )
+    }
+  }
+  // ────────────────────────────────────────────────────────────────────────────
+
   const fontName = rawFontName.replaceAll(" ", "+")
   const cacheKey = `${fontName}-${weight}`
   const cacheDir = path.join(QUARTZ, ".quartz-cache", "fonts")
   const cachePath = path.join(cacheDir, cacheKey)
 
-  // Check if font exists in cache
   try {
     await fs.access(cachePath)
     return fs.readFile(cachePath)
@@ -88,27 +126,23 @@ export async function fetchTtf(
     // ignore errors and fetch font
   }
 
-  // Get css file from google fonts
   const cssResponse = await fetch(
     `https://fonts.googleapis.com/css2?family=${fontName}:wght@${weight}`,
   )
   const css = await cssResponse.text()
 
-  // Extract .ttf url from css file
   const urlRegex = /url\((https:\/\/fonts.gstatic.com\/s\/.*?.ttf)\)/g
   const match = urlRegex.exec(css)
 
   if (!match) {
     console.log(
-      styleText(
-        "yellow",
+      chalk.yellow(
         `\nWarning: Failed to fetch font ${rawFontName} with weight ${weight}, got ${cssResponse.statusText}`,
       ),
     )
     return
   }
 
-  // fontData is an ArrayBuffer containing the .ttf file data
   const fontResponse = await fetch(match[1])
   const fontData = Buffer.from(await fontResponse.arrayBuffer())
   await fs.mkdir(cacheDir, { recursive: true })
@@ -118,82 +152,50 @@ export async function fetchTtf(
 }
 
 export type SocialImageOptions = {
-  /**
-   * What color scheme to use for image generation (uses colors from config theme)
-   */
   colorScheme: ThemeKey
-  /**
-   * Height to generate image with in pixels (should be around 630px)
-   */
   height: number
-  /**
-   * Width to generate image with in pixels (should be around 1200px)
-   */
   width: number
-  /**
-   * Whether to use the auto generated image for the root path ("/", when set to false) or the default og image (when set to true).
-   */
   excludeRoot: boolean
-  /**
-   * JSX to use for generating image. See satori docs for more info (https://github.com/vercel/satori)
-   */
   imageStructure: (
-    options: ImageOptions & {
-      userOpts: UserOpts
-      iconBase64?: string
-    },
+    cfg: GlobalConfiguration,
+    userOpts: UserOpts,
+    title: string,
+    description: string,
+    fonts: SatoriOptions["fonts"],
+    fileData: QuartzPluginData,
   ) => JSXInternal.Element
 }
 
 export type UserOpts = Omit<SocialImageOptions, "imageStructure">
 
 export type ImageOptions = {
-  /**
-   * what title to use as header in image
-   */
   title: string
-  /**
-   * what description to use as body in image
-   */
   description: string
-  /**
-   * header + body font to be used when generating satori image (as promise to work around sync in component)
-   */
   fonts: SatoriOptions["fonts"]
-  /**
-   * `GlobalConfiguration` of quartz (used for theme/typography)
-   */
   cfg: GlobalConfiguration
-  /**
-   * full file data of current page
-   */
   fileData: QuartzPluginData
 }
 
-// This is the default template for generated social image.
-export const defaultImage: SocialImageOptions["imageStructure"] = ({
-  cfg,
-  userOpts,
-  title,
-  description,
-  fileData,
-  iconBase64,
-}) => {
-  const { colorScheme } = userOpts
+export const defaultImage: SocialImageOptions["imageStructure"] = (
+  cfg: GlobalConfiguration,
+  { colorScheme }: UserOpts,
+  title: string,
+  description: string,
+  _fonts: SatoriOptions["fonts"],
+  fileData: QuartzPluginData,
+) => {
   const fontBreakPoint = 32
   const useSmallerFont = title.length > fontBreakPoint
+  const iconPath = `https://${cfg.baseUrl}/static/icon.png`
 
-  // Format date if available
   const rawDate = getDate(cfg, fileData)
   const date = rawDate ? formatDate(rawDate, cfg.locale) : null
 
-  // Calculate reading time
   const { minutes } = readingTime(fileData.text ?? "")
   const readingTimeText = i18n(cfg.locale).components.contentMeta.readingTime({
     minutes: Math.ceil(minutes),
   })
 
-  // Get tags if available
   const tags = fileData.frontmatter?.tags ?? []
   const bodyFont = getFontSpecificationName(cfg.theme.typography.body)
   const headerFont = getFontSpecificationName(cfg.theme.typography.header)
@@ -210,7 +212,7 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
         fontFamily: bodyFont,
       }}
     >
-      {/* Header Section */}
+      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -219,16 +221,7 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
           marginBottom: "0.5rem",
         }}
       >
-        {iconBase64 && (
-          <img
-            src={iconBase64}
-            width={56}
-            height={56}
-            style={{
-              borderRadius: "50%",
-            }}
-          />
-        )}
+        <img src={iconPath} width={56} height={56} style={{ borderRadius: "50%" }} />
         <div
           style={{
             display: "flex",
@@ -241,14 +234,8 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
         </div>
       </div>
 
-      {/* Title Section */}
-      <div
-        style={{
-          display: "flex",
-          marginTop: "1rem",
-          marginBottom: "1.5rem",
-        }}
-      >
+      {/* Title */}
+      <div style={{ display: "flex", marginTop: "1rem", marginBottom: "1.5rem" }}>
         <h1
           style={{
             margin: 0,
@@ -268,7 +255,7 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
         </h1>
       </div>
 
-      {/* Description Section */}
+      {/* Description */}
       <div
         style={{
           display: "flex",
@@ -292,7 +279,7 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
         </p>
       </div>
 
-      {/* Footer with Metadata */}
+      {/* Footer */}
       <div
         style={{
           display: "flex",
@@ -303,7 +290,6 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
           borderTop: `1px solid ${cfg.theme.colors[colorScheme].lightgray}`,
         }}
       >
-        {/* Left side - Date and Reading Time */}
         <div
           style={{
             display: "flex",
@@ -347,7 +333,6 @@ export const defaultImage: SocialImageOptions["imageStructure"] = ({
           </div>
         </div>
 
-        {/* Right side - Tags */}
         <div
           style={{
             display: "flex",
