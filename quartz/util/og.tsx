@@ -173,12 +173,16 @@ export type ImageOptions = {
 
 export const defaultImage: SocialImageOptions["imageStructure"] = (
   cfg: GlobalConfiguration,
-  { colorScheme }: UserOpts,
+  userOpts: UserOpts | undefined,
   title: string,
   description: string,
   _fonts: SatoriOptions["fonts"],
   fileData: QuartzPluginData,
 ) => {
+  // Quartz 4.5.x calls imageStructure with userOpts sometimes undefined.
+  // Default to darkMode so the function survives that path.
+  const colorScheme: ThemeKey = userOpts?.colorScheme ?? "darkMode"
+
   const fontBreakPoint = 32
   const useSmallerFont = title.length > fontBreakPoint
   const iconPath = `https://${cfg.baseUrl}/static/icon.png`
