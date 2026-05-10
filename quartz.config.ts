@@ -81,7 +81,15 @@ const config: QuartzConfig = {
       // self-hosted fonts from quartz/static/fonts/ before falling back to
       // Google Fonts. Amarante uses weight 700 (header), Aptos Narrow uses
       // weight 400 (body). Both must exist as .ttf (satori does not read woff2).
-      Plugin.CustomOgImages(),
+      //
+      // Options are required in Quartz 4.5.x: defaultImage destructures
+      // userOpts, so passing nothing crashes.
+      Plugin.CustomOgImages({
+        colorScheme: "darkMode",
+        width: 1200,
+        height: 630,
+        excludeRoot: false,
+      }),
     ],
   },
 }
