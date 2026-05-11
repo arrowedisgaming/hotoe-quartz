@@ -2,7 +2,7 @@
 publish: true
 title: Session 0.5 — New Year's Eve
 created: 2026-05-08
-modified: 2026-05-10T17:15:48.057-04:00
+modified: 2026-05-11T09:25:30.725-04:00
 tags:
   - recap
   - session
@@ -11,11 +11,15 @@ tags:
 
 # Session 0.5 — New Year's Eve
 
+![[Pasted image 20260511092529.png]]
+
 ### The setting
 
 - New Year's Eve, December 31, 1892, into January 1, 1893
 - Dr. Julia Smith's party at the University Women's Club, 5 Bond Street, London
 - Pine boughs left from Christmas, mulled wine, piano, candles. A crowded room of progressive women and their guests
+
+![[Pasted image 20260511092329.png]]
 
 ### The PCs Arrive
 
@@ -37,6 +41,8 @@ tags:
 - She kept glancing at the door.
 - She brought up Maria, a student. Maria was expected, but did not show.
 - She raised it with Worth. Drifted back to the topic after changing the subject
+
+![[drsmith.png]]
 
 ### Smith's departure
 
