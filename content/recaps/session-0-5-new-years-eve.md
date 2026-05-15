@@ -2,7 +2,7 @@
 publish: true
 title: Session 0.5 — New Year's Eve
 created: 2026-05-08
-modified: 2026-05-11T09:25:30.725-04:00
+modified: 2026-05-15T10:54:12.723-04:00
 tags:
   - recap
   - session
@@ -42,7 +42,7 @@ tags:
 - She brought up Maria, a student. Maria was expected, but did not show.
 - She raised it with Worth. Drifted back to the topic after changing the subject
 
-![[drsmith.png]]
+![[People_and_Places/drsmith.png]]
 
 ### Smith's departure
 
