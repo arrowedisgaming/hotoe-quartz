@@ -1,8 +1,8 @@
 ---
 publish: true
-title: "# Session 1: Durward Street; RIP Maria Pook"
+title: "Session 1: Durward Street; RIP Maria Pook"
 created: 2026-05-15
-modified: 2026-05-15T17:17:01.311-04:00
+modified: 2026-05-15T17:18:53.704-04:00
 tags:
   - recap
   - session
