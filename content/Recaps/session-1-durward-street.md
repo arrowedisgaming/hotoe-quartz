@@ -2,7 +2,7 @@
 publish: true
 title: "Session 1: Durward Street; RIP Maria Pook"
 created: 2026-05-15
-modified: 2026-05-15T17:18:53.704-04:00
+modified: 2026-05-16T08:18:11.266-04:00
 tags:
   - recap
   - session
@@ -27,7 +27,7 @@ tags:
 
 ### Outside the tenement
 
-- Dr. Smith was pacing in the street. Visibly relieved when the party arrived
+- [[Julia-Smith]] was pacing in the street. Visibly relieved when the party arrived
 - The landlady, Mrs. Grim, took money from Smith at the door. Not friendly but not obstructive. Grim has a son and noticed Georgie reminded her of him
 - The hall stank of damp. Worse than Amelia's ever smelt
 
@@ -64,7 +64,7 @@ tags:
 - The bells of midnight sounded outside
 - The patient convulsed and died
 - The veil fell from her face onto the floor and continued whispering. A bloody ring on the skin where it had clung
-- A glimpse of the face beneath: a sweet young woman, perhaps in her twenties. Smith confirmed: **THIS IS MARIA POOK, PROFESSOR DEMIR'S STUDENT**
+- A glimpse of the face beneath: a sweet young woman, perhaps in her twenties. [[Julia-Smith]] confirmed: **THIS IS MARIA POOK, PROFESSOR DEMIR'S STUDENT**
 - The candles snuffed. A dark shape rose from her chest. It was corporeal
 - Dr. Hobbs leaned in to check the body. The shape bit him!
 
