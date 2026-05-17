@@ -2,7 +2,7 @@
 publish: true
 title: "Session 1: Durward Street; RIP Maria Pook"
 created: 2026-05-15
-modified: 2026-05-16T08:18:11.266-04:00
+modified: 2026-05-17T18:19:12.899-04:00
 tags:
   - recap
   - session
@@ -106,15 +106,3 @@ tags:
 - Amelia and Saroch are staying the night at Smith's house in St John's Wood, North London
 - Worth, Polat, and Georgie went home (?)
 - Party reconvenes at the University Women's Club for brunch around eleven
-
-### Unanswered questions
-
-- Who is Mrs. Leeds? Tall, fine bonnet with veil, well dressed, an accent from somewhere "up north." Cult leader? Something worse?
-- Was the woman who clocked Georgie at the corner Leeds herself? She knows his face now either way
-- What language is on the foreign papers Georgie picked up? What kind of tickets?
-- What is at the Shoreditch address from the notepad impression?
-- The veil cannot be burned. So how is it destroyed? Can it be?
-- What cult or tradition uses pre-Christian hieroglyph-like script and these two phrases?
-- Where does Demir fit in?
-- How did Pook end up in that room? Did she go willingly with Leeds, or was she taken?
-- The whispers. What language? Whose voice?
