@@ -144,3 +144,15 @@ pre,
   background: rgba(240, 118, 5, 0.35);
   color: inherit;
 }
+
+// ---- Completed task items ----------------------------------------------------
+// base.scss already strikes through checked task <li>s, but in "loose" GFM lists
+// the text sits inside a nested <p>, which breaks text-decoration propagation.
+// Re-apply on the descendant <p> so the strikethrough survives.
+
+article li:has(> input[type="checkbox"]:checked),
+article li:has(> input[type="checkbox"]:checked) > p {
+  text-decoration: line-through;
+  text-decoration-color: var(--gray);
+  color: var(--gray);
+}
