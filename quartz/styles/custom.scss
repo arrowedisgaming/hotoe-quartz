@@ -7,6 +7,8 @@
 //
 // Font files must live at quartz/static/fonts/*. See FONTS.md.
 
+@use "./base.scss";
+
 // ---- @font-face declarations -------------------------------------------------
 
 @font-face {
