@@ -2,14 +2,14 @@
 publish: true
 title: "Session 4: Shadows in the Corridor; That's Why We're on the Train"
 created: 2026-06-05
-modified: 2026-06-05T16:21:07.608-04:00
+modified: 2026-06-05T16:22:37.380-04:00
 tags:
   - recap
   - session
   - 1893
 ---
 
-# Session 4: Shadows in the Corridor
+# Session 4: "That is why we're on this train."
 
 ### The setting
 

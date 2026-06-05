@@ -1,7 +1,7 @@
 ---
 publish: true
-created: 2026-05-23T09:01:06.716-04:00
-modified: 2026-05-23T17:24:42.972-04:00
+created: 2026-06-01T08:51:30.034-04:00
+modified: 2026-06-01T08:51:30.034-04:00
 ---
 
 - Anthropologist based in Constantinople, trained in Turkey, Greece, and London
@@ -13,3 +13,4 @@ modified: 2026-05-23T17:24:42.972-04:00
 - Sent three telegrams to Smith warning about the veil and asking the party to bring it to Constantinople
 - Claims he can destroy the veil at Sirkeci Station, but the Apocrypha says the veil is indestructible
 - The party wants to verify his trustworthiness before boarding a train
+- Corroborated at the Oriental Club (Session 3): Captain Wrexley calls him a fine, upright, well-respected scholar, an ally of the Ottoman court and close to the Sultan, married with three nearly grown children. Writes on the region's primitive cults and religions. This makes him look more respectable, not necessarily more trustworthy

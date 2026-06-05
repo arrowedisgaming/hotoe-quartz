@@ -2,7 +2,7 @@
 publish: true
 title: Roll Log
 created: 2026-05-16
-modified: 2026-05-23T17:23:53.658-04:00
+modified: 2026-06-05T16:10:38.686-04:00
 tags:
   - role-log
   - mechanics
@@ -20,6 +20,45 @@ Columns:
 - **Result** — `Fumble` / `Failure` / `Success` / `Hard Success` / `Extreme Success` / `Critical`
 - **In Combat** — `Yes` if during an active combat round, otherwise `No`
 - **Notes** — context, SAN/MP lost, damage, weapon, target, opposed-roll outcome, qualifiers
+
+## Session 4 — Shadows in the Corridor (2026-06-05)
+
+Recap: [[session-4-shadows-in-the-corridor]]
+
+Colin (Worth) absent; Worth was NPC'd in the fight. Barrington's sabre and sanity rolls are excluded (he is a reserve companion, not one of the five PCs) — see the recap.
+
+| Character | Skill | Roll | Result | In Combat | Notes |
+| --------- | ----- | ---- | ------ | --------- | ----- |
+| Georgie | Stealth | 48 / 80 | Success | No | tailing Menkaph to her compartment; opposed, her Spot Hidden failed |
+| Saroch | Psychology | 07 / — | Success | No | reading Burnham; opposed, Burnham fumbled Fast Talk (100); rolled 07, possibly extreme, skill threshold not stated |
+| Kasim | Psychology | — / 50 | Success | No | listening in on Burnham; opposed, Burnham fumbled; die not stated, skill 50 |
+| Amelia | Spot Hidden | 90 / — | Failure | No | peering down the corridor for the shadow |
+| Amelia | Spot Hidden | 27 / 30 | Success | No | pushed; opposed (Keeper also succeeded), taker wins; sees the shadow right in front of her |
+| Amelia | Sanity | 30 / 82 | Hard Success | Yes | the shadow's true form, face of an unknown young woman; 1 SAN lost |
+| Amelia | Handgun | 61 / 65 | Success | Yes | .577 revolver, 1st shot; passed through the shadow, shattered a window |
+| Amelia | Dodge | — | Success | Yes | vs 1st shadow's Extreme; lost the opposed roll; 4 damage; mouth over her head |
+| Amelia | Dodge | — | Success | Yes | vs 2nd shadow; outnumbered, attacker took a bonus die; lost; 4 damage; down to 4 / 12 HP |
+| Georgie | Sanity | 82 / 70 | Failure | Yes | the shadows; 1 SAN lost; now a believer |
+| Worth | Sanity | 45 / 50 | Success | Yes | the shadows; 1 SAN lost; now a believer; Colin absent, Worth NPC'd; transcript garbled, Keeper ruled the loss |
+
+## Session 3 — All Aboard (2026-05-29)
+
+Recap: [[session-3-all-aboard]]
+
+Edmund (Amelia) and Jeffrey (Saroch) absent. Amelia was NPC'd by Elizabeth; Saroch tagged along quietly. No PC rolls recorded for either of them this session.
+
+| Character | Skill | Roll | Result | In Combat | Notes |
+| --------- | ----- | ---- | ------ | --------- | ----- |
+| Worth | Library Use | 70 / 70 | Success | No | Oriental Club; researching Demir; found references to The Whispering Veil (Ottoman, 1700s, no London copy) |
+| Georgie | Stealth | 61 / 80 | Success | No | Shoreditch; following Burnham; he glanced over but Georgie slipped the look |
+| Georgie | Locksmith | ?? / 65 | Extreme Success | No | Burnham's flat door; exact die garbled in transcript, Elizabeth ruled extreme, opened instantly |
+| Georgie | Spot Hidden | 44 / 60 | Success | No | Burnham's flat; found the client notebook naming Menkaf with that day's date |
+| Georgie | Luck | 75 / 80 | Success | No | scrounging clothes for the trip; turned up a shirt and two collars |
+| Polat | Sanity | 53 / 70 | Success | No | St Bart's morgue; the brain-tentacles in Pook's skull; no SAN lost |
+| Georgie | Sanity | 33 / 70 | Success | No | same; unmoved, assumes that is just what insides look like |
+| Worth | Sanity | 92 / — | Failure | No | same; took it hardest, lost 2 SAN (d4 = 2) |
+
+---
 
 ## Session 2 — The Veil Collector (2026-05-22)
 
